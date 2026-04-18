@@ -1,14 +1,14 @@
 {
-  "name": "shahadat-chat-bot",
+  "name": "ayan-Xhowdhury",
   "version": "2.0.0",
-  "description": "Made By SHAHADAT SAHU",
+  "description": "Made By AYAN XHOWDHURY",
   "main": "Main.js",
   "engines": {
     "node": "20.x",
     "npm": ">=10.0.0 <13.0.0"
   },
   "scripts": {
-    "start": "node Sahu.js",
+    "start": "node AYAN.js",
     "login": "node login",
     "test": "node --trace-warnings --use_strict --async-stack-traces mirai"
   },
@@ -18,16 +18,14 @@
   },
   "keywords": [
     "bot",
-    "facebook",
-    "shahadatproject",
     "messenger",
     "javascript",
-    "shadat",
+    "ayan",
     "ullash",
-    "shahadat sahu",
-    "shahadat chat bot"
+    "ayan khan",
+    "ayan chat bot"
   ],
-  "author": "SHAHADAT SAHU",
+  "author": "ayan js",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shahadat-sahu/SHAHADAT-CHAT-BOT/issues"
