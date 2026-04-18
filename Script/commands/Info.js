@@ -65,11 +65,7 @@ module.exports.run = async function ({ api, event, args, Users, Threads }) {
  😍─꯭─⃝‌‌AYAN 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭😘`;
 
  const imgLinks = [
- "https://i.imgur.com/zqsuJnX.jpeg",
- "https://i.imgur.com/sxSn1K3.jpeg",
- "https://i.imgur.com/wu0iDqS.jpeg",
- "https://i.imgur.com/Huz3nAE.png"
- ];
+ "https://i.postimg.cc/HjxwxgR9/Picsart-26-04-17-12-08-29-323.jpg"];
 
  const imgLink = imgLinks[Math.floor(Math.random() * imgLinks.length)];
 
