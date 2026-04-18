@@ -1,7 +1,7 @@
 module.exports.config = {
  name: "𝐀𝐲𝐚𝐧",
  version: "1.0.0",
- hasPermssion: 0,
+ hasPermssion: 1,
  credits: "𝐀𝐘𝐀𝐍 𝐗𝐇𝐎𝐃𝐇𝐔𝐑𝐘 ",
  description: "Bot will reply when someone tags any of the admins",
  commandCategory: "Other",
@@ -32,7 +32,7 @@ module.exports.handleEvent = function({ api, event }) {
  "মেনশন না দিয়া বস বল বস 🥵💋",
  "কিরে তোর এতো সাহস আমার বসের নাম ধরিস😾🫵",
  "এতো মেনশন না দিয়া তোর গার্লফ্রেন্ডটারে দিয়া দে😹🐸",
- "মেনশন দিয়ে লাভ নাই বস সাহু এখন বিজি আছেন😗😘"
+ "মেনশন দিয়ে লাভ নাই বস ayan এখন বিজি আছেন😗😘"
  ];
  return api.sendMessage(replies[Math.floor(Math.random() * replies.length)], event.threadID, event.messageID);
  }
