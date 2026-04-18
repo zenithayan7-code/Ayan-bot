@@ -31,7 +31,7 @@ module.exports.handleEvent = async function ({ api, event }) {
     "good morning": "GOOD MORNING দাত ব্রাশ করে খেয়ে নেও😚",
     "good night": "Sweet Dream babu… তবে আগে ayan বস কে GN বলে নিও 😏💤",
     "tor ball": "~ এখনো বাল উঠে নাই নাকি তোমার?? 🤖",
-    "shahadat": "উনি এখন কাজে বিজি আছে কি বলবেন আমাকে বলতে পারেন..!😘",
+    "AYAN": "উনি এখন কাজে বিজি আছে কি বলবেন আমাকে বলতে পারেন..!😘",
     "owner": "‎[𝐎𝐖𝐍𝐄𝐑:☞ RIDOAN AHMDED AyAN
     "admin": "He is ZENITH AYAN তাকে সবাই Admin AYAN হিসেবে চিনে😘☺️",
     "babi": "এ তো হাছিনা হে মেরে দিলকি দারকান হে মেরি জান হে😍.",
