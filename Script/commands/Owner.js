@@ -2,7 +2,7 @@ const request = require("request");
 const fs = require("fs-extra");
 
 module.exports.config = {
-  name: "owner",
+  name: "𝐀𝐲𝐚𝐧",
   version: "1.0.1",
   hasPermssion: 0,
   credits: "ayan xhowdhury",
@@ -30,19 +30,16 @@ module.exports.run = async function ({ api, event }) {
 ║ 🔗 𝗖𝗢𝗡𝗧𝗔𝗖𝗧 𝗟𝗜𝗡𝗞𝗦
 ╠═════════════════════ ✿
 ║ 📘 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸 :
-║ fb.com/100001039692046
+║ fb.com/61579489193750
 ║ 💬 𝗠𝗲𝘀𝘀𝗲𝗻𝗴𝗲𝗿 :
-║ m.me/100001039692046
+║ m.me/61579489193750
 ║ 📞 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽 :
-║ wa.me/01882333052
-║ ✈️ 𝗧𝗲𝗹𝗲𝗴𝗿𝗮𝗺 :
-║ t.me/yoursahu
+║ wa.me/01825784274
 ╚═════════════════════ ✿
 `;
 
   const images = [
-    "https://i.postimg.cc/HjxwxgR9/Picsart-26-04-17-12-08-29-323.jpg"
-
+    "https://i.postimg.cc/mD8zQ0Zk/Picsart-26-04-18-19-12-16-620.jpg"
   ];
 
   const randomImg = images[Math.floor(Math.random() * images.length)];
