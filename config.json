@@ -1,5 +1,5 @@
 {
-  "Author": "SHAHADAT SAHU",
+  "Author": "ayan xhowdhury",
   "version": "2.0.0",
   "language": "en",
   "DeveloperMode": false,
@@ -8,17 +8,17 @@
   "allowInbox": false,
   "notiGroup": true,
   "NOTIFICATION": true,
-  "EMAIL": "your email",
+  "EMAIL": "ayanxhowdhury43@gmail.com",
   "PASSWORD": "your password",
   "OTPKEY": "",
-  "BOTNAME": "─꯭─⃝‌‌𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭",
+  "BOTNAME": "─꯭─⃝‌‌ayan 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭",
   "PREFIX": "/",
   "reactUnsend": ["😡", "🤧", "😤", "😠"],
 
   "ADMINBOT": [
-    "100001039692046",
-    "61586663640809",
-    "100044713412032"
+    "/61573291456091",
+    "168262306982",
+    "1682623069821854"
   ],
   "NDH": ["100044713412032"],
   "adminOnly": false,
