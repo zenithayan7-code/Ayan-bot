@@ -4,10 +4,10 @@ const fs = require("fs-extra");
 const moment = require("moment-timezone");
 
 module.exports.config = {
- name: "admin",
+ name: "AYAN",
  version: "1.0.0",
- hasPermssion: 0,
- credits: "SHAHADAT SAHU",
+ hasPermssion: 1,
+ credits: "RIDOAN AHMED AYAN",
  description: "Show Owner Info",
  commandCategory: "info",
  usages: "admin",
@@ -22,22 +22,21 @@ module.exports.run = async function({ api, event }) {
 ┌───────────────⭓
 │ 𝗢𝗪𝗡𝗘𝗥 𝗗𝗘𝗧𝗔𝗜𝗟𝗦
 ├───────────────
-│ 👤 𝐍𝐚𝐦𝐞 : 𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐈𝐬𝐥𝐚𝐦
+│ 👤 𝐍𝐚𝐦𝐞 : RIDOAN AHMED AYAN
 │ 🚹 𝐆𝐞𝐧𝐝𝐞𝐫 : 𝐌𝐚𝐥𝐞
 │ ❤️ 𝐑𝐞𝐥𝐚𝐭𝐢𝐨𝐧 : 𝐒𝐢𝐧𝐠𝐥𝐞
-│ 🎂 𝐀𝐠𝐞 : 𝟏𝟖+
+│ 🎂 𝐀𝐠𝐞 : 𝟏7+
 │ 🕌 𝐑𝐞𝐥𝐢𝐠𝐢𝐨𝐧 : 𝐈𝐬𝐥𝐚𝐦
-│ 🎓 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧 : 𝐇𝐒𝐂 (𝟐𝟎𝟐𝟔)
-│ 🏡 𝐀𝐝𝐝𝐫𝐞𝐬𝐬 : 𝐊𝐡𝐚𝐠𝐫𝐚𝐜𝐡𝐡𝐚𝐫𝐢
+│ 🎓 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧 : SCC
+│ 🏡 𝐀𝐝𝐝𝐫𝐞𝐬𝐬 : DHAKA MIRPUR
 └───────────────⭓
 
 ┌───────────────⭓
 │ 𝗖𝗢𝗡𝗧𝗔𝗖𝗧 𝗟𝗜𝗡𝗞𝗦
 ├───────────────
 │ 📘 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸:
-│ https://fb.com/100001039692046
-│ 💬 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽:
-│ https://wa.me/01882333052
+│ 
+│ 
 └───────────────⭓
 
 ┌───────────────⭓
