@@ -40,7 +40,7 @@ module.exports.run = async function ({ api, event }) {
     writer.on("finish", () => {
       api.sendMessage(
         {
-          body: "🎬 AYAN Anemi Random Video",
+          body: "🎬 Ayan Anemi Video",
           attachment: fs.createReadStream(filePath)
         },
         event.threadID,
