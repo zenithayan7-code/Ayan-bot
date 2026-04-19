@@ -16,7 +16,9 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({ api, event, args, Users }) {
- try {
+ try { const threadInfo = await api.getThreadInfo(event.threadID);
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+      
  const uid = event.senderID;
  const senderName = await Users.getNameUser(uid);
  const rawQuery = args.join(" ");
