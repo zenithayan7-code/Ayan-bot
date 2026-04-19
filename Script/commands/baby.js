@@ -112,7 +112,9 @@ module.exports.run = async function ({ api, event, args, Users }) {
 };
 
 module.exports.handleReply = async function ({ api, event, Users, handleReply }) {
- try {
+ try { const threadInfo = await api.getThreadInfo(event.threadID);
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+      
  const senderName = await Users.getNameUser(event.senderID);
  const replyText = event.body ? event.body.toLowerCase() : "";
  if (!replyText) return;
@@ -142,7 +144,9 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
 };
 
 module.exports.handleEvent = async function ({ api, event, Users }) {
- try {
+ try { const threadInfo = await api.getThreadInfo(event.threadID);
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+      
  const raw = event.body ? event.body.toLowerCase().trim() : "";
  if (!raw) return;
 
