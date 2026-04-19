@@ -16,8 +16,10 @@ module.exports.config = {
 };
 
 module.exports.run = async function ({ api, event, args, Users }) {
- try { const threadInfo = await api.getThreadInfo(event.threadID);
- if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+ try {  const threadInfo = await api.getThreadInfo(event.threadID);
+ const botAdminID = "61573291456091"; 
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID) && event.senderID != botAdminID) return;
+      
       
  const uid = event.senderID;
  const senderName = await Users.getNameUser(uid);
@@ -112,8 +114,10 @@ module.exports.run = async function ({ api, event, args, Users }) {
 };
 
 module.exports.handleReply = async function ({ api, event, Users, handleReply }) {
- try { const threadInfo = await api.getThreadInfo(event.threadID);
- if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+ try {  const threadInfo = await api.getThreadInfo(event.threadID);
+ const botAdminID = "61573291456091"; 
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID) && event.senderID != botAdminID) return;
+      
       
  const senderName = await Users.getNameUser(event.senderID);
  const replyText = event.body ? event.body.toLowerCase() : "";
@@ -144,8 +148,10 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
 };
 
 module.exports.handleEvent = async function ({ api, event, Users }) {
- try { const threadInfo = await api.getThreadInfo(event.threadID);
- if (!threadInfo.adminIDs.some(item => item.id == event.senderID)) return;
+ try {  const threadInfo = await api.getThreadInfo(event.threadID);
+ const botAdminID = "61573291456091"; 
+ if (!threadInfo.adminIDs.some(item => item.id == event.senderID) && event.senderID != botAdminID) return;
+      
       
  const raw = event.body ? event.body.toLowerCase().trim() : "";
  if (!raw) return;
