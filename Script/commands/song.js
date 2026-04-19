@@ -85,8 +85,10 @@ global.client.handleReply.push({
       api.sendMessage("Invalid choice. Please enter a number between 1 and 6.",event.threadID,event.messageID);
     }
     } catch (error) {
-      console.log(error);
-      api.sendMessage("⭕ Sorry, audio size was less than 26MB",event.threadID,event.messageID)
+  console.log(error);
+  api.sendMessage(`⭕ সমস্যা: ${error.message}`, event.threadID, event.messageID);
+    }
+   
     }   
  };
 async function dipto(url,pathName) {
