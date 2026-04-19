@@ -146,93 +146,24 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
  return api.sendMessage(`Error: ${err.message}`, event.threadID, event.messageID);
  }
 };
-
 module.exports.handleEvent = async function ({ api, event, Users }) {
- try {  const threadInfo = await api.getThreadInfo(event.threadID);
- const botAdminID = "61573291456091"; 
- if (!threadInfo.adminIDs.some(item => item.id == event.senderID) && event.senderID != botAdminID) return;
-      
-      
- const raw = event.body ? event.body.toLowerCase().trim() : "";
- if (!raw) return;
+  try {
+    const threadInfo = await api.getThreadInfo(event.threadID);
+    const botAdminID = "61573291456091"; 
+    
+    // অনুমতি চেক (অ্যাডমিন অথবা আপনি)
+    if (!threadInfo.adminIDs.some(item => item.id == event.senderID) && event.senderID != botAdminID) return;
 
- const senderName = await Users.getNameUser(event.senderID);
- const senderID = event.senderID;
+    const raw = event.body ? event.body.toLowerCase() : "";
 
- const simsim = await getMainAPI();
+    // আপনি (বস আয়ান) ডাকলে স্পেশাল সম্মান
+    if (event.senderID == botAdminID && (raw === "baby" || raw === "bot" || raw === "bby" || raw === "jan" || raw === "xan" || raw === "জান" || raw === "বট" || raw === "বেবি")) {
+      return api.sendMessage("জি বস আয়ান, বলেন কী হুকুম? আপনার জন্য আমি সবসময় হাজির! ❤️", event.threadID, event.messageID);
+    }
 
-const greetings = [
-        "বেশি bot Bot করলে leave নিবো কিন্তু😒😒",
-        "শুনবো না😼 তুমি আমার বস আয়ান কে প্রেম করাই দাও নাই🥺পচা তুমি🥺",
-        "আমি আবাল দের সাথে কথা বলি না,ok😒",
-        "এতো ডেকো না,প্রেম এ পরে যাবো তো🙈",
-        "Bolo Babu, তুমি কি আমার বস আয়ান কে ভালোবাসো? 🙈💋",
-        "বার বার ডাকলে মাথা গরম হয়ে যায় কিন্তু😑",
-        "হ্যা বলো😒, তোমার জন্য কি করতে পারি😐😑?",
-        "এতো ডাকছিস কেন?গালি শুনবি নাকি? 🤬",
-        "I love you janu🥰",
-        "আরে Bolo আমার জান ,কেমন আছো?😚",
-        "আজ বট বলে অসম্মান করছি,😰😿",
-        "Hop beda😾,Boss বল boss😼",
-        "চুপ থাক ,নাই তো তোর দাত ভেগে দিবো কিন্তু",
-        "আমাকে না ডেকে মেয়ে হলে বস আয়ানের ইনবক্সে চলে যা 🌚😂 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/profile.php?id=61573291456091",
-        "আমাকে বট না বলে , বস আয়ান কে জানু বল জানু 😘",
-        "বার বার Disturb করছিস কোনো😾,আমার জানুর সাথে ব্যাস্ত আছি😋",
-        "আরে বলদ এতো ডাকিস কেন🤬",
-        "আমাকে ডাকলে ,আমি কিন্তু কিস করে দিবো😘",
-        "আমারে এতো ডাকিস না আমি মজা করার mood এ নাই এখন😒",
-        "হ্যাঁ জানু , এইদিক এ আসো কিস দেই🤭 😘",
-        "দূরে যা, তোর কোনো কাজ নাই, শুধু bot bot করিস 😉😋🤣",
-        "তোর কথা তোর বাড়ি কেউ শুনে না ,তো আমি কোনো শুনবো ?🤔😂",
-        "আমাকে ডেকো না,আমি বস আয়ানের সাথে ব্যাস্ত আছি",
-        "কি হলো , মিস্টেক করচ্ছিস নাকি🤣",
-        "বলো কি বলবা, সবার সামনে বলবা নাকি?🤭🤏",
-        "জান মেয়ে হলে বস আয়ানের ইনবক্সে চলে যাও 😍🫣💕 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/profile.php?id=61573291456091",
-        "কালকে দেখা করিস তো একটু 😈",
-        "হা বলো, শুনছি আমি 😏",
-        "আর কত বার ডাকবি ,শুনছি তো",
-        "হুম বলো কি বলবে😒",
-        "বলো কি করতে পারি তোমার জন্য",
-        "আমি তো অন্ধ কিছু দেখি না🐸 😎",
-        "আরে বোকা বট না জানু বল জানু😌",
-        "বলো জানু 🌚",
-        "তোর কি চোখে পড়ে না আমি ব্যাস্ত আছি😒",
-        "হুম জান তোমার ওই খানে উম্মহ😑😘",
-        "আহ শুনা আমার তোমার অলিতে গলিতে উম্মাহ😇😘",
-        "jang hanga korba😒😬",
-        "হুম জান তোমার অইখানে উম্মমাহ😷😘",
-        "আসসালামু আলাইকুম বলেন আপনার জন্য কি করতে পারি..!🥰",
-        "ভালোবাসার নামক আবলামি করতে চাইলে বস আয়ানের ইনবক্সে গুতা দিন ~🙊😘🤣 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/profile.php?id=61573291456091",
-        "আমাকে এতো না ডেকে বস আয়ান এর কে একটা গফ দে 🙄",
-        "আমাকে এতো না ডেকছ কেন ভলো টালো বাসো নাকি🤭🙈",
-        "🌻🌺💚-আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ-💚🌺🌻",
-        "আমি এখন বস আয়ান এর সাথে বিজি আছি আমাকে ডাকবেন না-😕😏 ধন্যবাদ-🤝🌻",
-        "আমাকে না ডেকে আমার বস আয়ন কে একটা জি এফ দাও-😽🫶🌺",
-        "ঝাং থুমালে আইলাপিউ পেপি-💝😽",
-        "উফফ বুঝলাম না এতো ডাকছেন কেনো-😤😡😈",
-        "জান তোমার বান্ধবী রে আমার বস আয়ানের হাতে তুলে দিবা-🙊🙆‍♂",
-        "আজকে আমার মন ভালো নেই তাই আমারে ডাকবেন না-😪🤧",
-        "ঝাং 🫵থুমালে য়ামি রাইতে পালুপাসি উম্মম্মাহ-🌺🤤💦",
-        "চুনা ও চুনা আমার বস আয়ানের এর হবু বউ রে কেও দেকছো খুজে পাচ্ছি না😪🤧😭",
-        "স্বপ্ন তোমারে নিয়ে দেখতে চাই তুমি যদি আমার হয়ে থেকে যাও-💝🌺🌻",
-        "জান হাঙ্গা করবা-🙊😝🌻",
-        "জান মেয়ে হলে চিপায় আসো বস আয়ানের থেকে অনেক ভালোবাসা শিখছি তোমার জন্য-🙊🙈😽",
-        "ইসস এতো ডাকো কেনো লজ্জা লাগে তো-🙈🖤🌼",
-        "আমার বস সাহুর পক্ষ থেকে তোমারে এতো এতো ভালোবাসা-🥰😽🫶 আমার বস আয়ান ইসলামে'র জন্য দোয়া করবেন-💝💚🌺🌻",
-        "- ভালোবাসা নামক আব্লামি করতে মন চাইলে আমার বস আয়ান এর ইনবক্স চলে যাও-🙊🥱👅 🌻𝐅𝐀𝐂𝐄𝐁𝐎𝐎𝐊 𝐈𝐃 𝐋𝐈𝐍𝐊 🌻:- https://www.facebook.com/profile.php?id=61573291456091",
-        "আমার জান তুমি শুধু আমার আমি তোমারে ৩৬৫ দিন ভালোবাসি-💝🌺😽",
-        "কিরে প্রেম করবি তাহলে বস আয়নের ইনবক্সে গুতা দে 😘🤌 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/profile.php?id=61573291456091",
-        "জান আমার বস সাহু কে বিয়ে করবা-🙊😘🥳",
-        "-আন্টি-🙆-আপনার মেয়ে-👰‍♀️-রাতে আমারে ভিদু কল দিতে বলে🫣-🥵🤤💦",
-        "oii-🥺🥹-এক🥄 চামচ ভালোবাসা দিবা-🤏🏻🙂",
-        "-আপনার সুন্দরী বান্ধুবীকে ফিতরা হিসেবে আমার বস অয়ন কে দান করেন-🥱🐰🍒",
-        "-ও মিম ও মিম-😇-তুমি কেন চুরি করলা সাদিয়ার ফর্সা হওয়ার ক্রীম-🌚🤧",
-        "-অনুমতি দিলাম-𝙋𝙧𝙤𝙥𝙤𝙨𝙚 কর বস আয়ান কে-🐸😾🔪",
-        "-𝙂𝙖𝙮𝙚𝙨-🤗-যৌবনের কসম দিয়ে আমারে 𝐁𝐥𝐚𝐜𝐤𝐦𝐚𝐢𝐥 করা হচ্ছে-🥲🤦‍♂️🤧",
-        "-𝗢𝗶𝗶 আন্টি-🙆‍♂️-তোমার মেয়ে চোখ মারে-🥺🥴🐸",
-        "তাকাই আছো কেন চুমু দিবা-🙄🐸😘",
-        "আজকে প্রপোজ করে দেখো রাজি হইয়া যামু-😌🤗😇",
-        "-আমার গল্পে তোমার নানি সেরা-🙊🙆‍♂️🤗",
+    // আপনার সেই বিশাল ডায়ালগ লিস্ট
+    const greetings = [
+        "ল্পে তোমার নানি সেরা-🙊🙆‍♂️🤗",
         "কি বেপার আপনি শ্বশুর বাড়িতে যাচ্ছেন না কেন-🤔🥱🌻",
         "দিনশেষে পরের 𝐁𝐎𝐖 সুন্দর-☹️🤧",
         "-তাবিজ কইরা হইলেও ফ্রেম এক্কান করমুই তাতে যা হই হোক-🤧🥱🌻",
@@ -249,7 +180,7 @@ const greetings = [
         "ভালোবাসার নামক আবলামি করতে চাইলে বস আয়ানের ইনবক্সে গুতা দিন🤣😼",
         "মেয়ে হলে বস আয়ান ইনবক্সে চলে যা 🤭🤣😼 𝐅𝐚𝐜𝐞𝐛𝐨𝐨𝐤 𝐋𝐢𝐧𝐤 : https://www.facebook.com/profile.php?id=61573291456091",
         "হুদাই আমারে শয়তানে লারে-😝😑☹️",
-        "-𝗜 𝗟𝗢𝗩𝗘 𝗬𝗢𝗨-😽-আহারে ভাবছো তোমারে প্রোপজ করছি-🥴-থাপ্পর দিয়া কিডনী লক করে দিব-😒-ভুল পড়া বের করে দিবো-🤭🐸",
+        "-𝗜 𝐋𝐎𝐕𝐄 𝐘𝐎𝗨-😽-আহারে ভাবছো তোমারে প্রোপজ করছি-🥴-থাপ্পর দিয়া কিডনী লক করে দিব-😒-ভুল পড়া বের করে দিবো-🤭🐸",
         "-আমি একটা দুধের শিশু-😇-🫵𝗬𝗢𝗨🐸💦",
         "-কতদিন হয়ে গেলো বিছনায় মুতি না-😿-মিস ইউ নেংটা কাল-🥺🤧",
         "-বালিকা━👸-𝐃𝐨 𝐲𝐨𝐮-🫵-বিয়া-𝐦𝐞-😽-আমি তোমাকে-😻-আম্মু হইতে সাহায্য করব-🙈🥱",
@@ -262,54 +193,16 @@ const greetings = [
         "-দেশের সব কিছুই চুরি হচ্ছে-🙄-শুধু আমার বস আয়ান এর মনটা ছাড়া-🥴😑😏",
         "-🫵তোমারে প্রচুর ভাল্লাগে-😽-সময় মতো প্রপোজ করমু বুঝছো-🔨😼-ছিট খালি রাইখো- 🥱🐸🥵",
         "-আজ থেকে আর কাউকে পাত্তা দিমু না -!😏-কারণ আমি ফর্সা হওয়ার ক্রিম কিনছি -!🙂🐸"
-      ];
+    ];
+
+    // অন্য অ্যাডমিনদের জন্য র্যান্ডম রিপ্লাই
+    if (raw === "baby" || raw === "bot" || raw === "bby" || raw === "jan" || raw === "xan" || raw === "জান" || raw === "বট" || raw === "বেবি") {
+      const randomReply = greetings[Math.floor(Math.random() * greetings.length)];
+      return api.sendMessage(randomReply, event.threadID, event.messageID);
+    }
+  } catch (err) {
+    console.log(err);
+ 
+     
 
 
- if (
- raw === "baby" || raw === "bot" || raw === "bby" ||
- raw === "jan" || raw === "xan" || raw === "জান" ||
- raw === "বট" || raw === "বেবি"
- ) {
- const randomReply = greetings[Math.floor(Math.random() * greetings.length)];
- return api.sendMessage(randomReply, event.threadID, (err, info) => {
- if (!err) {
- global.client.handleReply.push({
- name: module.exports.config.name,
- messageID: info.messageID,
- author: senderID,
- type: "simsimi"
- });
- }
- }, event.messageID);
- }
-
- if (
- raw.startsWith("baby ") || raw.startsWith("bot ") || raw.startsWith("bby ") ||
- raw.startsWith("jan ") || raw.startsWith("xan ") ||
- raw.startsWith("জান ") || raw.startsWith("বট ") || raw.startsWith("বেবি ")
- ) {
- const query = raw.replace(/^baby\s+|^bot\s+|^bby\s+|^jan\s+|^xan\s+|^জান\s+|^বট\s+|^বেবি\s+/i, "").trim();
- if (!query) return;
-
- const res = await axios.get(`${simsim}/simsimi?text=${encodeURIComponent(query)}&senderName=${encodeURIComponent(senderName)}`);
- const replies = Array.isArray(res.data.response) ? res.data.response : [res.data.response];
-
- for (const rep of replies) {
- await new Promise(resolve => {
- api.sendMessage(rep, event.threadID, (err, info) => {
- if (!err) {
- global.client.handleReply.push({
- name: module.exports.config.name,
- messageID: info.messageID,
- author: senderID,
- type: "simsimi"
- });
- }
- resolve();
- }, event.messageID);
- });
- }
- }
-
- } catch {}
-};
