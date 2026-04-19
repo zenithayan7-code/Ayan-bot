@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 
 module.exports.config = {
     name: "sing",
-    version: "1.0.0",
+    version: "2.0.0",
     hasPermssion: 0,
     credits: "Ayan",
     description: "ইউটিউব থেকে গান ডাউনলোড",
@@ -17,32 +17,31 @@ module.exports.run = async function ({ api, event, args }) {
     if (!keyWord) return api.sendMessage("গানের নাম দিন অয়ন ভাই!", event.threadID, event.messageID);
 
     try {
-        api.sendMessage(`🔍 "${keyWord}" গানটি খুঁজছি...`, event.threadID, event.messageID);
+        api.sendMessage(`🔍 অয়ন ভাই, "${keyWord}" গানটি খুঁজছি...`, event.threadID, event.messageID);
 
-        // সরাসরি কাজ করবে এমন একটি পাবলিক API
-        const res = await axios.get(`https://lyrist.vercel.app/api/${encodeURIComponent(keyWord)}`);
+        // এটি একটি সুপার ফাস্ট এবং ওয়ার্কিং API
+        const res = await axios.get(`https://api.vyturex.com/yt-search?query=${encodeURIComponent(keyWord)}`);
+        const video = res.data[0];
+
+        if (!video) return api.sendMessage("গানটি পাওয়া যায়নি!", event.threadID, event.messageID);
+
+        const videoUrl = `https://www.youtube.com/watch?v=${video.id}`;
         
-        // যদি উপরেরটা কাজ না করে, তবে এই নিচের লিঙ্কটি ব্যবহার হবে
-        const searchURL = `https://api.popcat.xyz/lyrics?song=${encodeURIComponent(keyWord)}`;
-        const searchRes = await axios.get(searchURL);
+        // ডাউনলোড লিঙ্ক পাওয়ার জন্য অন্য একটি ব্যাকআপ API
+        const downloadRes = await axios.get(`https://api.vyturex.com/yt-dl?url=${videoUrl}`);
+        const audioUrl = downloadRes.data.audioUrl;
+
+        const path = __dirname + `/cache/${event.senderID}_song.mp3`;
         
-        const title = searchRes.data.title || keyWord;
-        const artist = searchRes.data.artist || "Unknown";
-        
-        // অডিও ডাউনলোডের জন্য ব্যাকআপ API
-        const downloadUrl = `https://api.djasubandri.repl.co/yt/play?query=${encodeURIComponent(keyWord)}`;
-        
-        const path = __dirname + `/cache/sing_${event.senderID}.mp3`;
-        
-        const data = (await axios.get(downloadUrl, { responseType: "arraybuffer" })).data;
-        fs.writeFileSync(path, Buffer.from(data, "utf-8"));
+        const audioData = (await axios.get(audioUrl, { responseType: "arraybuffer" })).data;
+        fs.writeFileSync(path, Buffer.from(audioData, "utf-8"));
 
         return api.sendMessage({
-            body: `✅ আপনার গান রেডি!\n🎵 নাম: ${title}\n👤 শিল্পী: ${artist}`,
+            body: `🎶 আপনার গান রেডি অয়ন ভাই!\n\n🎵 নাম: ${video.title}\n⏰ সময়: ${video.duration}`,
             attachment: fs.createReadStream(path)
         }, event.threadID, () => fs.unlinkSync(path), event.messageID);
 
     } catch (e) {
-        return api.sendMessage("দুঃখিত অয়ন ভাই, ইউটিউব সার্ভারে সমস্যা হচ্ছে। লিরিক্স ভিডিও ট্রাই করুন।", event.threadID, event.messageID);
+        return api.sendMessage("এরর: ইউটিউব সার্ভারে জ্যাম লেগেছে অথবা গানটি অনেক বড়। অন্য গান ট্রাই করুন!", event.threadID, event.messageID);
     }
 }
